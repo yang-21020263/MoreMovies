@@ -1,6 +1,8 @@
 package sg.edu.rp.c346.id21020263.mymovies;
 
-public class Movie {
+import java.io.Serializable;
+
+public class Movie implements Serializable {
 
     private int id;
     private String title;

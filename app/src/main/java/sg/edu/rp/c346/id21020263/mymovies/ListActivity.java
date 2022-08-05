@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+
 import java.sql.Array;
 import java.util.ArrayList;
 
@@ -40,6 +41,8 @@ public class ListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long identity) {
                 Movie movie = al.get(position);
                 Intent i = new Intent(ListActivity.this, EditActivity.class);
+                i.putExtra("movie", movie);
+                startActivity(i);
             }
         });
     }

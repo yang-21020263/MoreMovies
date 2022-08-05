@@ -1,7 +1,9 @@
 package sg.edu.rp.c346.id21020263.mymovies;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -69,16 +71,39 @@ public class EditActivity extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DBHelper dbh = new DBHelper(EditActivity.this);
-                dbh.deleteMovie(movie.getId());
+                AlertDialog.Builder myBuilder = new AlertDialog.Builder(EditActivity.this);
+                myBuilder.setTitle("Danger");
+                myBuilder.setMessage("Are you sure you want to delete the movie " + movie.getTitle());
+                myBuilder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        DBHelper dbh = new DBHelper(EditActivity.this);
+                        dbh.deleteMovie(movie.getId());
+                    }
+                });
+                myBuilder.setNegativeButton("Do not discard", null);
+                AlertDialog myDialog = myBuilder.create();
+                myDialog.show();
             }
         });
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+
+                AlertDialog.Builder myBuilder = new AlertDialog.Builder(EditActivity.this);
+                myBuilder.setTitle("Danger");
+                myBuilder.setMessage("Are you sure you want to discard the changes");
+                myBuilder.setPositiveButton("Discard", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+                    }
+                });
+                myBuilder.setNegativeButton("Do not discard", null);
+                AlertDialog myDialog = myBuilder.create();
+                myDialog.show();
             }
         });
-    }
+            }
 }
